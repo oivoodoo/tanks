@@ -3,7 +3,7 @@ Setup = =>
   @stage = new PIXI.Stage(0x97c56e, true)
 
   # create a renderer instance
-  @renderer = PIXI.autoDetectRenderer(window.innerwidth, window.innerheight, null)
+  @renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, null)
 
   # add the renderer view element to the dom
   @document.body.appendChild(renderer.view)
@@ -11,28 +11,29 @@ Setup = =>
   @renderer.view.style.top = "0px"
   @renderer.view.style.left = "0px"
 
-class DisplayObject
-  update: ->
-  draw: ->
-
-class Player extends DisplayObject
+class Player
   frame_name: 'tank.png'
   constructor: ->
     @image = PIXI.Sprite.fromFrame(@frame_name)
     stage.addChild(@image)
   update: ->
+    @image.position.x += 1
     # TODO: move to somewhere.
   draw: ->
     # TODO: draw somewhere on the page.
 
 class Game
   sprites: ['/images/sprites/sprites.json']
-  constructor: (@name = "Tanks") ->
+  constructor: ->
   initialize: ->
     loader = new PIXI.AssetLoader(@sprites)
     loader.onComplete = =>
       @player = new Player()
     loader.load()
+  update: ->
+    @player.update()
+  draw: ->
+    @player.draw()
 
 # setup global objects here and create the global variables like world or
 # renderer
@@ -44,8 +45,9 @@ Setup()
 
 animate = =>
   requestAnimFrame(animate)
-  # render the stage
-  @renderer.render(stage)
+  @game.update()
+  @game.draw()
+  renderer.render(stage)
 
 requestAnimFrame(animate)
 
