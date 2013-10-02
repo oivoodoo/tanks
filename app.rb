@@ -2,6 +2,7 @@ require 'sinatra/base'
 
 require 'sprockets'
 require 'sprockets-helpers'
+require 'coffee-script'
 
 require_relative 'lib/assets'
 require_relative 'lib/global_settings'

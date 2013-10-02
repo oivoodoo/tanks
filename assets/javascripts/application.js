@@ -1,1 +1,2 @@
-//= require game
+//= require_tree ./vendor
+//= require_tree ./tanks
