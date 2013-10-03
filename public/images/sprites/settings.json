@@ -1,8 +1,112 @@
 {"frames": {
 
+"brick.png":
+{
+	"frame": {"x":50,"y":2,"w":8,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
+	"sourceSize": {"w":8,"h":8}
+},
+"bullet-bottom.png":
+{
+	"frame": {"x":38,"y":32,"w":3,"h":4},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":3,"h":4},
+	"sourceSize": {"w":3,"h":4}
+},
+"bullet-left.png":
+{
+	"frame": {"x":56,"y":12,"w":4,"h":3},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":4,"h":3},
+	"sourceSize": {"w":4,"h":3}
+},
+"bullet-right.png":
+{
+	"frame": {"x":50,"y":12,"w":4,"h":3},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":4,"h":3},
+	"sourceSize": {"w":4,"h":3}
+},
+"bullet-top.png":
+{
+	"frame": {"x":32,"y":32,"w":3,"h":4},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":3,"h":4},
+	"sourceSize": {"w":3,"h":4}
+},
+"flag.png":
+{
+	"frame": {"x":2,"y":2,"w":16,"h":16},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
+	"sourceSize": {"w":16,"h":16}
+},
+"grey-enemy-tank-bottom.png":
+{
+	"frame": {"x":2,"y":37,"w":13,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":15},
+	"sourceSize": {"w":13,"h":15}
+},
+"grey-enemy-tank-left.png":
+{
+	"frame": {"x":17,"y":37,"w":15,"h":13},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":13},
+	"sourceSize": {"w":15,"h":13}
+},
+"grey-enemy-tank-right.png":
+{
+	"frame": {"x":17,"y":20,"w":15,"h":13},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":13},
+	"sourceSize": {"w":15,"h":13}
+},
+"grey-enemy-tank-top.png":
+{
+	"frame": {"x":2,"y":20,"w":13,"h":15},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":15},
+	"sourceSize": {"w":13,"h":15}
+},
+"stone.png":
+{
+	"frame": {"x":22,"y":54,"w":8,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
+	"sourceSize": {"w":8,"h":8}
+},
+"tree.png":
+{
+	"frame": {"x":12,"y":54,"w":8,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
+	"sourceSize": {"w":8,"h":8}
+},
+"water.png":
+{
+	"frame": {"x":2,"y":54,"w":8,"h":8},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
+	"sourceSize": {"w":8,"h":8}
+},
 "yellow-tank-bottom.png":
 {
-	"frame": {"x":17,"y":17,"w":13,"h":13},
+	"frame": {"x":47,"y":17,"w":13,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":13},
@@ -10,7 +114,7 @@
 },
 "yellow-tank-left.png":
 {
-	"frame": {"x":17,"y":2,"w":13,"h":13},
+	"frame": {"x":32,"y":17,"w":13,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":13},
@@ -18,7 +122,7 @@
 },
 "yellow-tank-right.png":
 {
-	"frame": {"x":2,"y":17,"w":13,"h":13},
+	"frame": {"x":35,"y":2,"w":13,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":13},
@@ -26,7 +130,7 @@
 },
 "yellow-tank-up.png":
 {
-	"frame": {"x":2,"y":2,"w":13,"h":13},
+	"frame": {"x":20,"y":2,"w":13,"h":13},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":13},
@@ -37,8 +141,8 @@
 	"version": "1.0",
 	"image": "settings.png",
 	"format": "RGBA8888",
-	"size": {"w":32,"h":32},
+	"size": {"w":64,"h":64},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:45f1811949a23d31f03c14b4b4f48c58:1/1$"
+	"smartupdate": "$TexturePacker:SmartUpdate:7e79e9df1ab5159b7e95fa5d0115108c:1/1$"
 }
 }
