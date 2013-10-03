@@ -1,4 +1,4 @@
-class Game
+class @Game
   sprites: ['/images/sprites/settings.json']
   constructor: ->
   initialize: ->
