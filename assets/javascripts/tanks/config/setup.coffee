@@ -14,7 +14,11 @@
   @stage = new PIXI.Stage(0x97c56e, true)
 
   # create a renderer instance
-  @renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, null)
+  # @renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, null)
+
+  # Lets use 2d canvas renderer because of using debug things for physics
+  # engine
+  @renderer = new PIXI.CanvasRenderer(window.innerWidth, window.innerHeight, null)
 
   # add the renderer view element to the dom
   @document.body.appendChild(renderer.view)
@@ -27,16 +31,20 @@
   doSleep = true
   @world = new b2World(gravity, doSleep)
 
+  view = renderer.view
+
+  # for the debug purporse lets use here 2d context only.
+  context = view.getContext('2d')
   debugDraw = new b2DebugDraw()
-  debugDraw.SetSprite(@renderer.view)
+  debugDraw.SetSprite(context)
   debugDraw.SetDrawScale(1)
   debugDraw.SetFillAlpha(0.3)
   debugDraw.SetLineThickness(1.0)
   debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit)
   @world.SetDebugDraw(debugDraw)
 
-  Physics.createBorder({ x: 0, y: stage.hitArea.width }, { x: stage.hitArea.width, y: stage.hitArea.width })
-  Physics.createBorder({ x: 0, y: 0 }, { x: stage.hitArea.width, y: 0 })
-  Physics.createBorder({ x: 0, y: 0 }, { x: 0, y: stage.hitArea.width })
-  Physics.createBorder({ x: stage.hitArea.width, y: stage.hitArea.width }, { x: stage.hitArea.width, y: 0 })
+  Physics.createBorder({ x: 0, y: view.height }, { x: view.width, y: view.height })
+  Physics.createBorder({ x: 0, y: 0 }, { x: view.width, y: 0 })
+  Physics.createBorder({ x: 0, y: 0 }, { x: 0, y: view.height })
+  Physics.createBorder({ x: view.width, y: 0 }, { x: view.width, y: view.height })
 

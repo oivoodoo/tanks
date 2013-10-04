@@ -8,10 +8,11 @@ Setup()
 
 animate = =>
   requestAnimFrame(animate)
+
   @game.update()
   @game.draw()
 
-  # world.DrawDebugData();
+  world.DrawDebugData();
   world.Step(1 / 60, 10, 10);
   world.ClearForces();
 

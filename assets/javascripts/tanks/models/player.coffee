@@ -20,20 +20,20 @@ class @Player
       PIXI.Texture.fromFrame("yellow-tank-left.png"),
       PIXI.Texture.fromFrame("yellow-tank-right.png")
     ]
-    @animation = new PIXI.animationClip(textures)
+    @animation = new PIXI.MovieClip(textures)
     stage.addChild(@animation)
 
   update: ->
     return unless @is_moving
 
     if @way is 37 # LEFT
-      @body.SetLinearVelocity(new b2Vec2(-100, 0))
+      @body.SetLinearVelocity(new b2Vec2(-1000, 0))
     if @way is 38 # UP
-      @body.SetLinearVelocity(new b2Vec2(0, -100))
+      @body.SetLinearVelocity(new b2Vec2(0, -1000))
     if @way is 39 # RIGHT
-      @body.SetLinearVelocity(new b2Vec2(100, 0))
+      @body.SetLinearVelocity(new b2Vec2(1000, 0))
     if @way is 40 # BOTTOM
-      @body.SetLinearVelocity(new b2Vec2(0, 100))
+      @body.SetLinearVelocity(new b2Vec2(0, 1000))
 
   draw: ->
     return unless @animation?

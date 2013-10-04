@@ -5,6 +5,7 @@ gem 'sprockets'
 gem 'sprockets-helpers'
 gem 'coffee-script'
 gem 'shotgun'
+gem 'sinatra-contrib'
 
 group :test do
   gem 'rspec'

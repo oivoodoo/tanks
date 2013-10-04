@@ -11,28 +11,29 @@ class @Physics
     world.CreateBody(bodyDef).CreateFixture(fixDef)
 
   @defaultBodyProperties:
-    linearDamping: 10
-    angularDamping: 10
-    density: 1.0
-    friction: 0.4
-    restitution: 0.2
-    gravityScale: 1.0
-    type: b2Body.b2_dynamicBody
+    linearDamping:    10
+    angularDamping:   10
+    density:          1.0
+    friction:         0.4
+    restitution:      0.2
+    gravityScale:     1.0
+    type:             b2Body.b2_dynamicBody
 
   @createBody: (width, height, x, y) ->
     options = @defaultBodyProperties
 
     fixDef = new b2FixtureDef
-    fixDef.density = options.density
-    fixDef.friction = options.friction
+    fixDef.density     = options.density
+    fixDef.friction    = options.friction
     fixDef.restitution = options.restitution
+
     fixDef.shape = new b2PolygonShape()
-    fixDef.shape.SetAsBox(width , height)
+    fixDef.shape.SetAsBox(width, height)
 
     bodyDef = new b2BodyDef()
-    bodyDef.linearDamping = options.linearDamping
+    bodyDef.linearDamping  = options.linearDamping
     bodyDef.angularDamping = options.angularDamping
-    bodyDef.type = options.type
+    bodyDef.type           = options.type
 
     # we are using here cartesian coordinates the center half of the center
     # in the canvas container
