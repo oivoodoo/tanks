@@ -28,13 +28,13 @@ class @Player
   update: ->
     return unless @is_moving
 
-    if @way is 37 # LEFT
+    if @way is Keys.LEFT
       @body.SetLinearVelocity(new b2Vec2(-1000, 0))
-    if @way is 38 # UP
+    if @way is Keys.UP
       @body.SetLinearVelocity(new b2Vec2(0, -1000))
-    if @way is 39 # RIGHT
+    if @way is Keys.RIGHT
       @body.SetLinearVelocity(new b2Vec2(1000, 0))
-    if @way is 40 # BOTTOM
+    if @way is Keys.BOTTOM
       @body.SetLinearVelocity(new b2Vec2(0, 1000))
 
   draw: ->
