@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra/reloader'
 
 require 'sprockets'
 require 'sprockets-helpers'
@@ -30,6 +31,10 @@ class App < Sinatra::Base
 
   configure :production do
     require 'newrelic_rpm'
+  end
+
+  configure :development do
+    register Sinatra::Reloader
   end
 
   helpers do
