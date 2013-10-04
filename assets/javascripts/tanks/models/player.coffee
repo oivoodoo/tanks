@@ -1,6 +1,8 @@
 class @Player
-  width: 16
-  height: 16
+  width: 13
+  height: 13
+  bodyWidth: 13 / 2
+  bodyHeight: 13 / 2
 
   constructor: (@x, @y, @way = 38, @is_moving = false) ->
     window.addEventListener 'keydown', (e) =>
@@ -11,7 +13,7 @@ class @Player
     window.addEventListener 'keyup', (e) =>
       @is_moving = false
 
-    @body = Physics.createBody(@width, @height, @x, @y)
+    @body = Physics.createBody(@bodyWidth, @bodyHeight, @x, @y)
 
   initialize: ->
     textures = [
@@ -39,8 +41,8 @@ class @Player
     return unless @animation?
 
     position = @body.GetPosition()
-    @animation.position.x = position.x
-    @animation.position.y = position.y
+    @animation.position.x = position.x - @bodyWidth
+    @animation.position.y = position.y - @bodyHeight
 
     # play frame
     if @way is Keys.LEFT
