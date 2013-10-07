@@ -20,6 +20,9 @@
   # engine
   @renderer = new PIXI.CanvasRenderer(window.innerWidth, window.innerHeight, null)
 
+  window.onresize = =>
+    @renderer.resize(window.innerWidth, window.innerHeight)
+
   # add the renderer view element to the dom
   @document.body.appendChild(renderer.view)
   @renderer.view.style.position = "absolute"
