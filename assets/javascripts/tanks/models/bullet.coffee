@@ -17,16 +17,17 @@ class @Bullet
 		@bullet_animation = new PIXI.MovieClip(textures)
 		stage.addChild(@bullet_animation)
 
+		if [Keys.RIGHT, Keys.LEFT].indexOf(@bullet_position) isnt -1
+			@body.SetAngle(@ROTATE)
+
 	update: ->
 		if @bullet_position is Keys.UP
 			@body.ApplyImpulse(new b2Vec2(0, -@SPEED), new b2Vec2(@x, @y))
 		if @bullet_position is Keys.BOTTOM
 			@body.ApplyImpulse(new b2Vec2(0, @SPEED), new b2Vec2(@x, @y))
 		if @bullet_position is Keys.RIGHT
-			@body.SetAngle(@ROTATE)
 			@body.ApplyImpulse(new b2Vec2(@SPEED, 0), new b2Vec2(@x, @y))
 		if @bullet_position is Keys.LEFT
-			@body.SetAngle(@ROTATE)
 			@body.ApplyImpulse(new b2Vec2(-@SPEED, 0), new b2Vec2(@x, @y))
 
 	draw: ->
