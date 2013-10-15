@@ -16,7 +16,7 @@ animate = =>
   world.Step(1 / 60, 10, 10);
   world.ClearForces();
 
-  renderer.render(stage)
+  #renderer.render(stage)
 
 requestAnimFrame(animate)
 
