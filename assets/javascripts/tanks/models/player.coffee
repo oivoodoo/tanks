@@ -16,7 +16,7 @@ class @Player
     window.addEventListener 'keyup', (e) =>
       @is_moving = false
 
-    @body = Physics.createBody(@bodyWidth, @bodyHeight, @x, @y)
+    @body = Physics.createPlayer(@bodyWidth, @bodyHeight, @x, @y)
     @bullets = []
 
     @shoot_time = new Date().getTime()
@@ -66,3 +66,4 @@ class @Player
       @player_animation.gotoAndPlay(2)
     if @way is Keys.BOTTOM
       @player_animation.gotoAndPlay(0)
+
