@@ -13,6 +13,7 @@ group :test do
 end
 
 group :development do
+  gem 'debugger'
   gem 'foreman'
   gem 'heroku'
 end
