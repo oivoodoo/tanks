@@ -4,16 +4,23 @@ class @Player
   bodyWidth: 13 / 2
   bodyHeight: 13 / 2
 
-  constructor: (@x, @y, @way = 38, @is_moving = false) ->
+  constructor: (@x, @y, @player_position = Keys.UP, @way = Keys.UP, @is_moving = false) ->
     window.addEventListener 'keydown', (e) =>
-      if [37, 38, 39, 40].indexOf(e.keyCode) isnt -1
-        @way = e.keyCode
+      if [Keys.LEFT, Keys.UP, Keys.RIGHT, Keys.BOTTOM, Keys.SPACE].indexOf(e.keyCode) isnt -1
+        @player_position = e.keyCode
         @is_moving = true
+
+      if [Keys.LEFT, Keys.UP, Keys.RIGHT, Keys.BOTTOM].indexOf(e.keyCode) isnt -1
+        @way = e.keyCode
 
     window.addEventListener 'keyup', (e) =>
       @is_moving = false
 
     @body = Physics.createBody(@bodyWidth, @bodyHeight, @x, @y)
+    @bullets = []
+
+    @shoot_time = new Date().getTime()
+    @shoot_delay = 2000
 
   initialize: ->
     textures = [
@@ -22,35 +29,40 @@ class @Player
       PIXI.Texture.fromFrame("yellow-tank-left.png"),
       PIXI.Texture.fromFrame("yellow-tank-right.png")
     ]
-    @animation = new PIXI.MovieClip(textures)
-    stage.addChild(@animation)
+    @player_animation = new PIXI.MovieClip(textures)
+    stage.addChild(@player_animation)
 
   update: ->
     return unless @is_moving
 
-    if @way is Keys.LEFT
+    if @player_position is Keys.LEFT
       @body.SetLinearVelocity(new b2Vec2(-1000, 0))
-    if @way is Keys.UP
+    if @player_position is Keys.UP
       @body.SetLinearVelocity(new b2Vec2(0, -1000))
-    if @way is Keys.RIGHT
+    if @player_position is Keys.RIGHT
       @body.SetLinearVelocity(new b2Vec2(1000, 0))
-    if @way is Keys.BOTTOM
+    if @player_position is Keys.BOTTOM
       @body.SetLinearVelocity(new b2Vec2(0, 1000))
 
+    if @player_position is Keys.SPACE
+      if @shoot_time < new Date().getTime()
+        position = @body.GetPosition()
+        @shoot_time = new Date().getTime() + @shoot_delay
+        @bullets.push new Bullet(position.x, position.y, @way)
+
   draw: ->
-    return unless @animation?
+    return unless @player_animation?
 
     position = @body.GetPosition()
-    @animation.position.x = position.x - @bodyWidth
-    @animation.position.y = position.y - @bodyHeight
+    @player_animation.position.x = position.x - @bodyWidth
+    @player_animation.position.y = position.y - @bodyHeight
 
     # play frame
     if @way is Keys.LEFT
-      @animation.gotoAndPlay(1)
+      @player_animation.gotoAndPlay(1)
     if @way is Keys.UP
-      @animation.gotoAndPlay(3)
+      @player_animation.gotoAndPlay(3)
     if @way is Keys.RIGHT
-      @animation.gotoAndPlay(2)
+      @player_animation.gotoAndPlay(2)
     if @way is Keys.BOTTOM
-      @animation.gotoAndPlay(0)
-
+      @player_animation.gotoAndPlay(0)
