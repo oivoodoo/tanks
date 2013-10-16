@@ -35,7 +35,7 @@ class @Bullet
     @bullet_animation.position.x = position.x - @bodyWidth
     @bullet_animation.position.y = position.y - @bodyHeight
 
-   	if @bullet_position is Keys.LEFT
+    if @bullet_position is Keys.LEFT
       @bullet_animation.gotoAndPlay(1)
     if @bullet_position is Keys.RIGHT
       @bullet_animation.gotoAndPlay(2)
@@ -43,7 +43,4 @@ class @Bullet
       @bullet_animation.gotoAndPlay(10)
     if @bullet_position is Keys.BOTTOM
       @bullet_animation.gotoAndPlay(4)
-    
-	 # position = @body.GetPosition()
-   # @image.position.x = position.x - @width
-   # @image.position.y = position.y - @height
+
