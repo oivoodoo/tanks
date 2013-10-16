@@ -9,6 +9,8 @@
 @b2Shape        = Box2D.Collision.Shapes.b2Shape
 @b2DebugDraw    = Box2D.Dynamics.b2DebugDraw
 
+@SCALE = 30
+
 @COLLISION_GROUP =
   'player':           0x0001
   'projectile':       0x0001 << 2
@@ -36,20 +38,20 @@ class @Physics
     friction:         0.4
     restitution:      0.2
     gravityScale:     1.0
-    type:             b2Body.b2_dynamicBody
+    type:             b2Body.b2_kinematicBody
 
   @createPlayer: (width, height, x, y) ->
     options = @defaultPlayerProperties
 
     fixDef = new b2FixtureDef
-    fixDef.density     = options.density
-    fixDef.friction    = options.friction
-    fixDef.restitution = options.restitution
+    fixDef.density             = options.density
+    fixDef.friction            = options.friction
+    fixDef.restitution         = options.restitution
     fixDef.filter.categoryBits = 0x0001
-    fixDef.filter.maskBits = 0x0001
+    fixDef.filter.maskBits     = 0x0001
 
     fixDef.shape = new b2PolygonShape()
-    fixDef.shape.SetAsBox(width, height)
+    fixDef.shape.SetAsBox(width / SCALE, height / SCALE)
 
     bodyDef = new b2BodyDef()
     bodyDef.linearDamping  = options.linearDamping
@@ -59,7 +61,7 @@ class @Physics
 
     # we are using here cartesian coordinates the center half of the center
     # in the canvas container
-    bodyDef.position.Set(x, y)
+    bodyDef.position.Set(x / SCALE, y / SCALE)
 
     body = world.CreateBody(bodyDef)
     body.CreateFixture(fixDef)
@@ -79,30 +81,30 @@ class @Physics
     options = @defaultBulletProperties
 
     fixDef = new b2FixtureDef
-    fixDef.density     = options.density
-    fixDef.friction    = options.friction
-    fixDef.restitution = options.restitution
+    fixDef.density             = options.density
+    fixDef.friction            = options.friction
+    fixDef.restitution         = options.restitution
     fixDef.filter.categoryBits = 0x0002
-    fixDef.filter.maskBits = 0x0002
+    fixDef.filter.maskBits     = 0x0002
 
     fixDef.shape = new b2PolygonShape()
-    fixDef.shape.SetAsBox(width, height)
+    fixDef.shape.SetAsBox(width / SCALE, height / SCALE)
 
     bodyDef = new b2BodyDef()
-    bodyDef.linearDamping  = options.linearDamping
-    bodyDef.angularDamping = options.angularDamping
-    bodyDef.type           = options.type
-    bodyDef.linearVelocity = new b2Vec2(0, 0)
+    bodyDef.linearDamping   = options.linearDamping
+    bodyDef.angularDamping  = options.angularDamping
+    bodyDef.type            = options.type
+    bodyDef.linearVelocity  = new b2Vec2(0, 0)
 
-    bodyDef.active = true
-    bodyDef.allowSleep = true
-    bodyDef.angle = 0
+    bodyDef.active          = true
+    bodyDef.allowSleep      = true
+    bodyDef.angle           = 0
     bodyDef.angularVelocity = 0
-    bodyDef.awake = true
-    bodyDef.bullet = false
-    bodyDef.fixedRotation = true
+    bodyDef.awake           = true
+    bodyDef.bullet          = false
+    bodyDef.fixedRotation   = true
 
-    bodyDef.position.Set(x, y)
+    bodyDef.position.Set(x / SCALE, y / SCALE)
 
     body = world.CreateBody(bodyDef)
     body.CreateFixture(fixDef)
@@ -119,8 +121,8 @@ class @Physics
     else
       bodyDef.type = b2Body.b2_dynamicBody
 
-    bodyDef.position.x = entityDef.x
-    bodyDef.position.y = entityDef.y
+    bodyDef.position.x = entityDef.x / SCALE
+    bodyDef.position.y = entityDef.y / SCALE
 
     if entityDef.userData
       bodyDef.userData = entityDef.userData
@@ -165,7 +167,7 @@ class @Physics
       body.CreateFixture(fixtureDefinition)
     else
       fixtureDefinition.shape = new b2PolygonShape
-      fixtureDefinition.shape.SetAsBox(entityDef.halfWidth, entityDef.halfHeight)
+      fixtureDefinition.shape.SetAsBox(entityDef.halfWidth / SCALE, entityDef.halfHeight / SCALE)
       body.CreateFixture(fixtureDefinition)
 
     body
