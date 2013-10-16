@@ -105,6 +105,8 @@ class @Physics
     bodyDef.position.Set(x, y)
 
     body = world.CreateBody(bodyDef)
+    body.SetUserData("bullet")
+    body.GetUserData();
     body.CreateFixture(fixDef)
 
     body
@@ -128,8 +130,9 @@ class @Physics
       bodyDef.angle = entityDef.angle
     if entityDef.damping
       bodyDef.linearDamping = entityDef.damping
-
     body = world.CreateBody(bodyDef)
+    body.SetUserData("body")
+    body.GetUserData();
 
     fixtureDefinition = new b2FixtureDef
 
@@ -146,7 +149,7 @@ class @Physics
       fixtureDefinition.filter.categories = 0x0000
       for category in entityDef.categories
         fixtureDefinition.filter.categoryBits |= COLLISION_GROUP[category]
-    else fixtureDefinition.filter.categoryBits = 0x0001
+    else fixtureDefinition.filter.categoryBits = 0x0001 | 0x0002
 
     if entityDef.collidesWith && entityDef.collidesWith.length
       fixtureDefinition.filter.maskBits = 0x0000

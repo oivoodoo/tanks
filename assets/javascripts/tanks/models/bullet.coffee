@@ -1,10 +1,10 @@
 class @Bullet
-	WIDTH: 1
-	HEIGHT: 5
+	WIDTH: 2
+	HEIGHT: 2
 	ROTATE: 90 * Math.PI / 180
 	SPEED: 5000
-	bodyWidth: 1 / 2
-	bodyHeight: 5 / 2
+	bodyWidth: 2 / 2
+	bodyHeight: 2 / 2
 
 	constructor: (@x, @y, @bullet_position) ->
 		@body = Physics.createBullet(@WIDTH, @HEIGHT, @x, @y)
