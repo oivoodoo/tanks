@@ -3,8 +3,10 @@ class @Player
   height: 13
   bodyWidth: 13 / 2
   bodyHeight: 13 / 2
+  SPEED: 4
 
   constructor: (@x, @y, @player_position = Keys.UP, @way = Keys.UP, @is_moving = false) ->
+    # TODO: move it out to the input class handler.
     window.addEventListener 'keydown', (e) =>
       if [Keys.LEFT, Keys.UP, Keys.RIGHT, Keys.BOTTOM, Keys.SPACE].indexOf(e.keyCode) isnt -1
         @player_position = e.keyCode
@@ -13,6 +15,7 @@ class @Player
       if [Keys.LEFT, Keys.UP, Keys.RIGHT, Keys.BOTTOM].indexOf(e.keyCode) isnt -1
         @way = e.keyCode
 
+    # TODO: move it out to the input class handler.
     window.addEventListener 'keyup', (e) =>
       @is_moving = false
 
@@ -36,26 +39,29 @@ class @Player
     return unless @is_moving
 
     if @player_position is Keys.LEFT
-      @body.SetLinearVelocity(new b2Vec2(-1000, 0))
+      @body.SetLinearVelocity(new b2Vec2(2, 4))
     if @player_position is Keys.UP
-      @body.SetLinearVelocity(new b2Vec2(0, -1000))
+      @body.SetLinearVelocity(new b2Vec2(0, -@SPEED))
     if @player_position is Keys.RIGHT
-      @body.SetLinearVelocity(new b2Vec2(1000, 0))
+      @body.SetLinearVelocity(new b2Vec2(@SPEED, 0))
     if @player_position is Keys.BOTTOM
-      @body.SetLinearVelocity(new b2Vec2(0, 1000))
+      @body.SetLinearVelocity(new b2Vec2(0, @SPEED))
 
     if @player_position is Keys.SPACE
-      if @shoot_time < new Date().getTime()
-        position = @body.GetPosition()
-        @shoot_time = new Date().getTime() + @shoot_delay
-        @bullets.push new Bullet(position.x, position.y, @way)
+      @shoot()
+
+  shoot: ->
+    if @shoot_time < new Date().getTime()
+      position = @body.GetPosition()
+      @shoot_time = new Date().getTime() + @shoot_delay
+      @bullets.push new Bullet(position.x, position.y, @way)
 
   draw: ->
     return unless @player_animation?
 
     position = @body.GetPosition()
-    @player_animation.position.x = position.x - @bodyWidth
-    @player_animation.position.y = position.y - @bodyHeight
+    @player_animation.position.x = position.x * SCALE - @bodyWidth
+    @player_animation.position.y = position.y * SCALE - @bodyHeight
 
     # play frame
     if @way is Keys.LEFT
