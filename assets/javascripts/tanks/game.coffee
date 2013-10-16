@@ -4,6 +4,7 @@ class @Game
   initialize: ->
     @player = new Player(window.innerWidth / 2, window.innerHeight / 2)
     @map = new Map(map1)
+    @contacts = new Contact
 
     loader = new PIXI.AssetLoader(@sprites)
     loader.onComplete = =>
@@ -12,6 +13,10 @@ class @Game
       # the next builds to make game playable like in quake respawn.
       @map.initialize()
       @player.initialize()
+
+      @contacts.addContactListener
+        BeginContact: (object1, object2) ->
+          console.log("#{object1} && #{object2}")
 
     loader.load()
   update: ->
