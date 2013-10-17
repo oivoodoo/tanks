@@ -80,32 +80,30 @@ class @Physics
     type:             b2Body.b2_dynamicBody
 
   @createBullet: (width, height, x, y) ->
-    debugger
     options = @defaultBulletProperties
     fixDef = new b2FixtureDef
-    fixDef.density     = options.density
-    fixDef.friction    = options.friction
-    fixDef.restitution = options.restitution
+    fixDef.density             = options.density
+    fixDef.friction            = options.friction
+    fixDef.restitution         = options.restitution
     fixDef.filter.categoryBits = 0x0002
-    fixDef.filter.maskBits = 0x0002
+    fixDef.filter.maskBits     = 0x0002
 
     fixDef.shape = new b2PolygonShape()
     fixDef.shape.SetAsBox(width, height)
 
     bodyDef = new b2BodyDef()
-    bodyDef.linearDamping  = options.linearDamping
-    bodyDef.angularDamping = options.angularDamping
-    bodyDef.type           = options.type
-    bodyDef.linearVelocity = new b2Vec2(0, 0)
-
-    bodyDef.active = true
-    bodyDef.allowSleep = true
-    bodyDef.angle = 0
+    bodyDef.linearDamping   = options.linearDamping
+    bodyDef.angularDamping  = options.angularDamping
+    bodyDef.type            = options.type
+    bodyDef.linearVelocity  = new b2Vec2(0, 0)
+    bodyDef.active          = true
+    bodyDef.allowSleep      = true
+    bodyDef.angle           = 0
     bodyDef.angularVelocity = 0
-    bodyDef.awake = true
-    bodyDef.bullet = false
-    bodyDef.fixedRotation = true
-    bodyDef.userData = { id: "bullet-#{uuid.v4()}", type: "bullet" }
+    bodyDef.awake           = true
+    bodyDef.bullet          = false
+    bodyDef.fixedRotation   = true
+    bodyDef.userData        = { id: "bullet-#{uuid.v4()}", type: "bullet" }
 
     bodyDef.position.Set(x, y)
 

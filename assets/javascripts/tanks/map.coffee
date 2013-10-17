@@ -1,3 +1,16 @@
+class Brick
+  constructor: (settings) ->
+    @body = Physics.createBody(settings)
+    @id = "brick-#{uuid.v4()}"
+    @body.SetUserData({ id: @id, type: 'brick' })
+    Physics.bodies[@id] = @
+    @lifes = 3
+
+  kill: ->
+    world.DestroyBody(@body)
+    delete Physics.bodies[@id]
+    stage.removeChild(@image)
+
 class @Map
   NUM_TITLES: 64
   TILE_SIZE: 8
@@ -11,6 +24,7 @@ class @Map
         # collisions.push('mapobject')
         # collides.push('all')
 
+        debugger
         settings =
           id: object.name,
           x:  object.x + object.width  * 0.5
@@ -25,8 +39,7 @@ class @Map
           userData:
             id: object.name
 
-        brick = new Brick(settings)
-        Physics.bodies[brick.id] = brick
+        @brick = new Brick(settings)
 
     for layer in @map.layers
       continue unless layer.data?
@@ -40,15 +53,7 @@ class @Map
         sprite.position.y = Math.floor(index / @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
         stage.addChild(sprite)
 
-class Brick
-  constructor: (settings) ->
-    @body = Physics.createBody(settings)
-    @id = "brick-#{uuid.v4()}"
-    @body.SetUserData({ id: @id, type: 'brick' })
-
-  kill: ->
-    world.DestroyBody(@body)
-    delete Physics.bodies[@id]
+        @brick.image = sprite
 
 
 # TODO: 1. load map file using require methods in the sprockets

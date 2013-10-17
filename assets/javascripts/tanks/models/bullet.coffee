@@ -52,4 +52,5 @@ class @Bullet
     index = game.player.bullets.indexOf(@)
     game.player.bullets.splice(index, 1)
     delete Physics.bodies[@id]
-    delete textures
+    stage.removeChild(@bullet_animation)
+
