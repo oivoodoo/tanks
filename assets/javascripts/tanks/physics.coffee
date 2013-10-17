@@ -19,6 +19,7 @@
 
 class @Physics
   @bodies: {}
+  @things: {}
 
   @createBorder: (point1, point2) ->
     bodyDef = new b2BodyDef
@@ -42,14 +43,13 @@ class @Physics
 
   @createPlayer: (width, height, x, y) ->
     options = @defaultPlayerProperties
-
+    options = @defaultPlayerProperties
     fixDef = new b2FixtureDef
     fixDef.density             = options.density
     fixDef.friction            = options.friction
     fixDef.restitution         = options.restitution
     fixDef.filter.categoryBits = 0x0001
     fixDef.filter.maskBits     = 0x0001
-    fixDef.userData            = { id: "player-#{uuid.v4()}", type: 'player' }
 
     fixDef.shape = new b2PolygonShape()
     fixDef.shape.SetAsBox(width, height)
@@ -59,6 +59,7 @@ class @Physics
     bodyDef.angularDamping = options.angularDamping
     bodyDef.type           = options.type
     bodyDef.fixedRotation  = true
+    bodyDef.userData       = { id: "player-#{uuid.v4()}", type: 'player' }
 
     # we are using here cartesian coordinates the center half of the center
     # in the canvas container
@@ -79,8 +80,8 @@ class @Physics
     type:             b2Body.b2_dynamicBody
 
   @createBullet: (width, height, x, y) ->
+    debugger
     options = @defaultBulletProperties
-
     fixDef = new b2FixtureDef
     fixDef.density     = options.density
     fixDef.friction    = options.friction
@@ -104,12 +105,11 @@ class @Physics
     bodyDef.awake = true
     bodyDef.bullet = false
     bodyDef.fixedRotation = true
+    bodyDef.userData = { id: "bullet-#{uuid.v4()}", type: "bullet" }
 
     bodyDef.position.Set(x, y)
 
     body = world.CreateBody(bodyDef)
-    body.SetUserData("bullet")
-    body.GetUserData();
     body.CreateFixture(fixDef)
 
     body

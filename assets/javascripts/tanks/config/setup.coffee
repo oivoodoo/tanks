@@ -7,10 +7,10 @@
 
   # Lets use 2d canvas renderer because of using debug things for physics
   # engine
-  @renderer = new PIXI.CanvasRenderer(window.innerWidth, window.innerHeight, null)
+  @renderer = new PIXI.CanvasRenderer(300, 300, null)
 
   window.onresize = =>
-    @renderer.resize(window.innerWidth, window.innerHeight)
+    @renderer.resize(400, 400)
 
   # add the renderer view element to the dom
   @document.body.appendChild(renderer.view)

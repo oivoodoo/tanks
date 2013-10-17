@@ -25,7 +25,8 @@ class @Map
           userData:
             id: object.name
 
-        Physics.createBody(settings)
+        brick = new Brick(settings)
+        Physics.bodies[brick.id] = brick
 
     for layer in @map.layers
       continue unless layer.data?
@@ -38,6 +39,16 @@ class @Map
         sprite.position.x = Math.floor(index % @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
         sprite.position.y = Math.floor(index / @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
         stage.addChild(sprite)
+
+class Brick
+  constructor: (settings) ->
+    @body = Physics.createBody(settings)
+    @id = "brick-#{uuid.v4()}"
+    @body.SetUserData({ id: @id, type: 'brick' })
+
+  kill: ->
+    world.DestroyBody(@body)
+    delete Physics.bodies[@id]
 
 
 # TODO: 1. load map file using require methods in the sprockets

@@ -1,8 +1,10 @@
 class @Game
+  dies: []
   sprites: ['/images/sprites/settings.json']
   constructor: ->
   initialize: ->
-    @player = new Player(window.innerWidth / 2, window.innerHeight / 2)
+
+    @player = new Player(300/2, 300/2)
     @map = new Map(map1)
     @contacts = new Contact
 
@@ -15,18 +17,22 @@ class @Game
       @player.initialize()
 
       @contacts.addContactListener
-        BeginContact: (object1, object2) ->
-          console.log("#{object1} && #{object2}")
-
-        PostSolve: (object1, object2) ->
-          console.log("#{object1}")
-
+        BeginContact: (object1, object2) =>
+          if object1.type == 'bullet' && object2.type == 'brick'
+            @dies.push(object1.id)
+            @dies.push(object2.id)
 
     loader.load()
   update: ->
     @player.update()
+
     for bullet in @player.bullets
       bullet.update()
+
+    for id in @dies
+      Physics.bodies[id].kill()
+    @dies = []
+
   draw: ->
     @player.draw()
     for bullet in @player.bullets

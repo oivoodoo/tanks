@@ -7,15 +7,18 @@ class @Bullet
 	bodyHeight: 2 / 2
 
 	constructor: (@x, @y, @bullet_position) ->
-		@body = Physics.createBullet(@WIDTH, @HEIGHT, @x, @y)
-		textures = [
-			PIXI.Texture.fromFrame("bullet-top.png"),
-			PIXI.Texture.fromFrame("bullet-bottom.png"),
-			PIXI.Texture.fromFrame("bullet-left.png"),
-			PIXI.Texture.fromFrame("bullet-right.png")
-		]
-		@bullet_animation = new PIXI.MovieClip(textures)
-		stage.addChild(@bullet_animation)
+    @body = Physics.createBullet(@WIDTH, @HEIGHT, @x, @y)
+    @id = @body.GetUserData().id
+    Physics.bodies[@id] = @
+
+    textures = [
+      PIXI.Texture.fromFrame("bullet-top.png"),
+      PIXI.Texture.fromFrame("bullet-bottom.png"),
+      PIXI.Texture.fromFrame("bullet-left.png"),
+      PIXI.Texture.fromFrame("bullet-right.png")
+    ]
+    @bullet_animation = new PIXI.MovieClip(textures)
+    stage.addChild(@bullet_animation)
 
 		if [Keys.RIGHT, Keys.LEFT].indexOf(@bullet_position) isnt -1
 			@body.SetAngle(@ROTATE)
@@ -44,3 +47,9 @@ class @Bullet
     if @bullet_position is Keys.BOTTOM
       @bullet_animation.gotoAndPlay(4)
 
+  kill: ->
+    world.DestroyBody(@body)
+    index = game.player.bullets.indexOf(@)
+    game.player.bullets.splice(index, 1)
+    delete Physics.bodies[@id]
+    delete textures
