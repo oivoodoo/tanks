@@ -17,6 +17,8 @@ class @Player
       @is_moving = false
 
     @body = Physics.createPlayer(@bodyWidth, @bodyHeight, @x, @y)
+    Physics.bodies[@body.GetUserData().id] = @
+
     @bullets = []
 
     @shoot_time = new Date().getTime()

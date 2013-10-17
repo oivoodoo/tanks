@@ -18,6 +18,8 @@
   'all':              0xFFFF
 
 class @Physics
+  @bodies: {}
+
   @createBorder: (point1, point2) ->
     bodyDef = new b2BodyDef
     bodyDef.type = b2Body.b2_staticBody
