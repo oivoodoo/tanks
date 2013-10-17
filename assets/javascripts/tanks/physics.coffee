@@ -132,8 +132,6 @@ class @Physics
     if entityDef.damping
       bodyDef.linearDamping = entityDef.damping
     body = world.CreateBody(bodyDef)
-    body.SetUserData("body")
-    body.GetUserData();
 
     fixtureDefinition = new b2FixtureDef
 
