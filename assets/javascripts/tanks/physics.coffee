@@ -42,11 +42,12 @@ class @Physics
     options = @defaultPlayerProperties
 
     fixDef = new b2FixtureDef
-    fixDef.density     = options.density
-    fixDef.friction    = options.friction
-    fixDef.restitution = options.restitution
+    fixDef.density             = options.density
+    fixDef.friction            = options.friction
+    fixDef.restitution         = options.restitution
     fixDef.filter.categoryBits = 0x0001
-    fixDef.filter.maskBits = 0x0001
+    fixDef.filter.maskBits     = 0x0001
+    fixDef.userData            = { id: "player-#{uuid.v4()}", type: 'player' }
 
     fixDef.shape = new b2PolygonShape()
     fixDef.shape.SetAsBox(width, height)
