@@ -18,6 +18,10 @@ class @Game
         BeginContact: (object1, object2) ->
           console.log("#{object1} && #{object2}")
 
+        PostSolve: (object1, object2) ->
+          console.log("#{object1}")
+
+
     loader.load()
   update: ->
     @player.update()
