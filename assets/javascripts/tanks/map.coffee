@@ -35,12 +35,22 @@ class Brick
 
 class @Map
   constructor: (@map) ->
+    @tileSets = []
   initialize: ->
+    for i in @map.tilesets
+      @ts =
+        firstgrid: @map.tilesets[i].firstgrid
+        name: @map.tilesets[i].name
+      @tileSets.push(@ts)
+
     for layer in @map.layers
       continue unless layer.data?
 
       for item, index in layer.data
         continue if item is 0
+
+        for i in @tileSets by -1
+          break if @tileSets[i].firstgrid <= index
 
         new Brick(item, index)
 
