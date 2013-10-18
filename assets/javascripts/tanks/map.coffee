@@ -39,7 +39,7 @@ class @Map
   initialize: ->
     for i in @map.tilesets
       @ts =
-        firstgrid: @map.tilesets[i].firstgrid
+        firstgid: @map.tilesets[i].firstgid
         name: @map.tilesets[i].name
       @tileSets.push(@ts)
 
@@ -50,7 +50,7 @@ class @Map
         continue if item is 0
 
         for i in @tileSets by -1
-          break if @tileSets[i].firstgrid <= index
+          break if @tileSets[i].firstgid <= index
 
         new Brick(item, index)
 
