@@ -10,12 +10,12 @@
 @b2DebugDraw    = Box2D.Dynamics.b2DebugDraw
 
 @COLLISION_GROUP =
-  'player':           0x0001
-  'projectile':       0x0001 << 2
-  'pickupobject':     0x0001 << 3
-  'mapobject':        0x0001 << 4
-  'projectileignore': 0x0001 << 5
-  'all':              0xFFFF
+  none:    0x0000
+  player:  0x0001
+  static:  0x0001 << 1
+  bullet:  0x0001 << 2
+  enemy:   0x0001 << 3
+  all:     0xFFFF
 
 class @Physics
   @bodies: {}
@@ -48,8 +48,7 @@ class @Physics
     fixDef.density             = options.density
     fixDef.friction            = options.friction
     fixDef.restitution         = options.restitution
-    fixDef.filter.categoryBits = 0x0001
-    fixDef.filter.maskBits     = 0x0001
+    fixDef.filter.categoryBits = COLLISION_GROUP.player
 
     fixDef.shape = new b2PolygonShape()
     fixDef.shape.SetAsBox(width, height)
@@ -85,8 +84,8 @@ class @Physics
     fixDef.density             = options.density
     fixDef.friction            = options.friction
     fixDef.restitution         = options.restitution
-    fixDef.filter.categoryBits = 0x0002
-    fixDef.filter.maskBits     = 0x0002
+    fixDef.filter.categoryBits = COLLISION_GROUP.bullet
+    fixDef.filter.maskBits     = COLLISION_GROUP.static | COLLISION_GROUP.enemy
 
     fixDef.shape = new b2PolygonShape()
     fixDef.shape.SetAsBox(width, height)
@@ -144,17 +143,19 @@ class @Physics
       fixtureDefinition.friction    = 0
       fixtureDefinition.restitution = 0
 
+    debugger
+
     if entityDef.categories && entityDef.categories.length
-      fixtureDefinition.filter.categories = 0x0000
+      fixtureDefinition.filter.categoryBits = COLLISION_GROUP.none
       for category in entityDef.categories
         fixtureDefinition.filter.categoryBits |= COLLISION_GROUP[category]
-    else fixtureDefinition.filter.categoryBits = 0x0001 | 0x0002
+    else fixtureDefinition.filter.categoryBits = COLLISION_GROUP.all
 
     if entityDef.collidesWith && entityDef.collidesWith.length
-      fixtureDefinition.filter.maskBits = 0x0000
+      fixtureDefinition.filter.maskBits = COLLISION_GROUP.none
       for collide in entityDef.collidesWith
         fixtureDefinition.filter.maskBits |= COLLISION_GROUP[collide]
-    else fixtureDefinition.filter.maskBits = 0xFFFF
+    else fixtureDefinition.filter.maskBits = COLLISION_GROUP.all
 
     if entityDef.radius
       fixtureDefinition.shape = new CircleShape(entityDef.radius)

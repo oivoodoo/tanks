@@ -1,18 +1,9 @@
-class BrickInteraction
-  constructor: (@bullet_data, @object_data) ->
-    @bullet = Physics.bodies[@bullet_data.id]
-    @object = Physics.bodies[@object_data.id]
-  update: ->
-    @bullet.kill()
-    @object.lifes -= 1
-    @object.kill() if @object.lifes is 0
-
 class @Game
   interactions: []
   sprites: ['/images/sprites/settings.json']
   constructor: ->
   initialize: ->
-    @player = new Player(300/2, 300/2)
+    @player = new Player(250, 250)
     @map = new Map(map1)
     @contacts = new Contact
 
@@ -29,6 +20,9 @@ class @Game
           if object1.type is 'bullet'
             if object2.type is 'brick'
               @interactions.push(new BrickInteraction(object1, object2))
+
+            if object2.type is 'stone'
+              @interactions.push(new StoneInteraction(object1, object2))
 
             # if object2.type is 'stone'
 

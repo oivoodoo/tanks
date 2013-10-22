@@ -1,58 +1,44 @@
-class Brick
-  NUM_TITLES: 32
-  TILE_SIZE: 16
-
-  constructor: (object, index) ->
-    @lifes = 3
-    @id = "brick-#{uuid.v4()}"
-
-    texture = PIXI.Texture.fromFrame("brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = Math.floor(index % @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
-    @sprite.position.y = Math.floor(index / @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
-    stage.addChild(@sprite)
-
-    settings =
-      id: @id,
-      x:  @sprite.position.x + @TILE_SIZE / 2
-      y:  @sprite.position.y + @TILE_SIZE / 2
-      halfHeight: @TILE_SIZE / 2
-      halfWidth:  @TILE_SIZE / 2
-      dampen: 0
-      angle:  0
-      type:   'static'
-      userData:
-        id: @id
-        type: 'brick'
-
-    @body = Physics.createBody(settings)
-    Physics.bodies[@id] = @
-
-  kill: ->
-    world.DestroyBody(@body)
-    delete Physics.bodies[@id]
-    stage.removeChild(@sprite)
-
 class @Map
   constructor: (@map) ->
-    @tileSets = []
-  initialize: ->
-    for i in @map.tilesets
-      @ts =
-        firstgid: @map.tilesets[i].firstgid
-        name: @map.tilesets[i].name
-      @tileSets.push(@ts)
 
+  initialize: ->
     for layer in @map.layers
       continue unless layer.data?
 
       for item, index in layer.data
         continue if item is 0
+        position = @getTileSet(item)
+        debugger
+        for key, value of PIXI.TextureCache
+          if position.x is value.frame.x && position.y is value.frame.y
+            if key is "stone.png"
+              new Stone(item, index)
+              break
+            if key is "brick.png"
+              new Brick(item, index)
+              break
+            if key is "tree.png"
+              new Tree(item, index)
+              break
+            if key is "water.png"
+              new Water(item, index)
+              break
 
-        for i in @tileSets by -1
-          break if @tileSets[i].firstgid <= index
 
-        new Brick(item, index)
+  getTileSet: (tileIndex) ->
+    @TILE_SIZE = 16
+    for tileset, index in @map.tilesets by -1
+      break if tileset.firstgid <= tileIndex
+
+    localIdx = tileIndex - tileset.firstgid
+    lTileX = Math.floor(localIdx % Math.floor(tileset.imagewidth / 16))
+    lTileY = Math.floor(localIdx / Math.floor(tileset.imageheight / 16))
+
+    x = lTileX * @TILE_SIZE
+    y = lTileY * @TILE_SIZE
+
+    { x: x, y: y }
+
 
 # TODO: 1. load map file using require methods in the sprockets
 # 2. Parse the map file and create the collision borders based on the json
