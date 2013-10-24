@@ -12,7 +12,7 @@ class @Game
       # we are building the map at the first main layer and then we should
       # place all the players on the map. they could be in the random place in
       # the next builds to make game playable like in quake respawn.
-      # @map.initialize()
+      @map.initialize()
       @player.initialize()
 
       @contacts.addContactListener
