@@ -8,7 +8,6 @@ class @Map
       for item, index in layer.data
         continue if item is 0
         position = @getTileSet(item)
-        debugger
         for key, value of PIXI.TextureCache
           if position.x is value.frame.x && position.y is value.frame.y
             if key is "stone.png"

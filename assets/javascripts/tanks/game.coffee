@@ -3,7 +3,7 @@ class @Game
   sprites: ['/images/sprites/settings.json']
   constructor: ->
   initialize: ->
-    @player = new Player(250, 250)
+    @player = new Player(600, 250)
     @map = new Map(map1)
     @contacts = new Contact
 
@@ -12,7 +12,7 @@ class @Game
       # we are building the map at the first main layer and then we should
       # place all the players on the map. they could be in the random place in
       # the next builds to make game playable like in quake respawn.
-      @map.initialize()
+      # @map.initialize()
       @player.initialize()
 
       @contacts.addContactListener

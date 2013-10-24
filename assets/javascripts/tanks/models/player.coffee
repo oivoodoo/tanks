@@ -4,25 +4,29 @@ class @Player
   bodyWidth: 13 / 2
   bodyHeight: 13 / 2
 
-  constructor: (@x, @y, @player_position = Keys.UP, @way = Keys.UP, @is_moving = false) ->
-    window.addEventListener 'keydown', (e) =>
-      if [Keys.LEFT, Keys.UP, Keys.RIGHT, Keys.BOTTOM, Keys.SPACE].indexOf(e.keyCode) isnt -1
-        @player_position = e.keyCode
-        @is_moving = true
+  constructor: (@x, @y) ->
+    @keys = Keys.NONE
 
-      if [Keys.LEFT, Keys.UP, Keys.RIGHT, Keys.BOTTOM].indexOf(e.keyCode) isnt -1
-        @way = e.keyCode
+    window.addEventListener 'keydown', (e) =>
+      key = KeyboardMapping[e.keyCode]
+      if key?
+        @keys2 = @keys | key
+        if @keys2 != @keys
+          @keys = @keys2
 
     window.addEventListener 'keyup', (e) =>
-      @is_moving = false
+      key = KeyboardMapping[e.keyCode]
+      if key?
+        @keys2 = @keys & ~key
+        if @keys2 != @keys
+          @keys = @keys2
 
     @body = Physics.createPlayer(@bodyWidth, @bodyHeight, @x, @y)
     Physics.bodies[@body.GetUserData().id] = @
-
     @bullets = []
 
     @shoot_time = new Date().getTime()
-    @shoot_delay = 2000
+    @shoot_delay = 500
 
   initialize: ->
     textures = [
@@ -35,18 +39,16 @@ class @Player
     stage.addChild(@player_animation)
 
   update: ->
-    return unless @is_moving
-
-    if @player_position is Keys.LEFT
+    if (@keys & Keys.LEFT) is Keys.LEFT
       @body.SetLinearVelocity(new b2Vec2(-1000, 0))
-    if @player_position is Keys.UP
+    if (@keys & Keys.UP) is Keys.UP
       @body.SetLinearVelocity(new b2Vec2(0, -1000))
-    if @player_position is Keys.RIGHT
+    if (@keys & Keys.RIGHT) is Keys.RIGHT
       @body.SetLinearVelocity(new b2Vec2(1000, 0))
-    if @player_position is Keys.BOTTOM
+    if (@keys & Keys.BOTTOM) is Keys.BOTTOM
       @body.SetLinearVelocity(new b2Vec2(0, 1000))
 
-    if @player_position is Keys.SPACE
+    if (@keys & Keys.SPACE) is Keys.SPACE
       if @shoot_time < new Date().getTime()
         position = @body.GetPosition()
         @shoot_time = new Date().getTime() + @shoot_delay
@@ -60,12 +62,11 @@ class @Player
     @player_animation.position.y = position.y - @bodyHeight
 
     # play frame
-    if @way is Keys.LEFT
+    if (@keys & Keys.LEFT) is Keys.LEFT
       @player_animation.gotoAndPlay(1)
-    if @way is Keys.UP
+    if (@keys & Keys.UP) is Keys.UP
       @player_animation.gotoAndPlay(3)
-    if @way is Keys.RIGHT
+    if (@keys & Keys.RIGHT) is Keys.RIGHT
       @player_animation.gotoAndPlay(2)
-    if @way is Keys.BOTTOM
+    if (@keys & Keys.BOTTOM) is Keys.BOTTOM
       @player_animation.gotoAndPlay(0)
-

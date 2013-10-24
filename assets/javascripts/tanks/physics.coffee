@@ -143,8 +143,6 @@ class @Physics
       fixtureDefinition.friction    = 0
       fixtureDefinition.restitution = 0
 
-    debugger
-
     if entityDef.categories && entityDef.categories.length
       fixtureDefinition.filter.categoryBits = COLLISION_GROUP.none
       for category in entityDef.categories
