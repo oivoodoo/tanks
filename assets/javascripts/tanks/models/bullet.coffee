@@ -6,7 +6,8 @@ class @Bullet
   bodyWidth: 2 / 2
   bodyHeight: 2 / 2
 
-  constructor: (@x, @y, @bullet_position) ->
+  constructor: (@x, @y, @way, @current_position = 10) ->
+    @keys = Keys.NONE
     @body = Physics.createBullet(@WIDTH, @HEIGHT, @x, @y)
     @id = @body.GetUserData().id
     Physics.bodies[@id] = @
@@ -19,18 +20,17 @@ class @Bullet
     ]
     @bullet_animation = new PIXI.MovieClip(textures)
     stage.addChild(@bullet_animation)
-
-    if [Keys.RIGHT, Keys.LEFT].indexOf(@bullet_position) isnt -1
+    if [Keys.RIGHT, Keys.LEFT, Keys.UP, Keys.BOTTOM].indexOf(@way) isnt -1
       @body.SetAngle(@ROTATE)
 
   update: ->
-    if @bullet_position is Keyboard.LEFT
+    if @way is 1
       @body.ApplyImpulse(new b2Vec2(-@SPEED, 0), new b2Vec2(@x, @y))
-    if @bullet_position is Keyboard.UP
+    if @way is 3
       @body.ApplyImpulse(new b2Vec2(0, -@SPEED), new b2Vec2(@x, @y))
-    if @bullet_position is Keyboard.RIGHT
+    if @way is 2
       @body.ApplyImpulse(new b2Vec2(@SPEED, 0), new b2Vec2(@x, @y))
-    if @bullet_position is Keyboard.BOTTOM
+    if @way is 0
       @body.ApplyImpulse(new b2Vec2(0, @SPEED), new b2Vec2(@x, @y))
 
   draw: ->
@@ -38,15 +38,17 @@ class @Bullet
     @bullet_animation.position.x = position.x - @bodyWidth
     @bullet_animation.position.y = position.y - @bodyHeight
 
-    if @bullet_position is Keyboard.LEFT
-      @bullet_animation.gotoAndPlay(1)
-    if @bullet_position is Keyboard.RIGHT
-      @bullet_animation.gotoAndPlay(2)
-    if @bullet_position is Keyboard.UP
-      @bullet_animation.gotoAndPlay(10)
-    if @bullet_position is Keyboard.BOTTOM
-      @bullet_animation.gotoAndPlay(4)
+    if @way is Keys.LEFT
+      @current_position = 1
+    if @way is Keys.RIGHT
+      @current_position = 2
+    if @way is Keys.UP
+      @current_position = 10
+    if @way is Keys.BOTTOM
+      @current_position = 4
 
+    @bullet_animation.gotoAndPlay(@current_position)
+    
   kill: ->
     world.DestroyBody(@body)
     index = game.player.bullets.indexOf(@)

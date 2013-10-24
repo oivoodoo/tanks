@@ -4,7 +4,7 @@ class @Player
   bodyWidth: 13 / 2
   bodyHeight: 13 / 2
 
-  constructor: (@x, @y, @n = 3) ->
+  constructor: (@x, @y, @way = 3) ->
     @keys = Keys.NONE
 
     window.addEventListener 'keydown', (e) =>
@@ -63,12 +63,12 @@ class @Player
 
     # play frame
     if (@keys & Keys.LEFT) is Keys.LEFT
-      @n = 1
+      @way = 1
     if (@keys & Keys.UP) is Keys.UP
-      @n = 3
+      @way = 3
     if (@keys & Keys.RIGHT) is Keys.RIGHT
-      @n = 2
+      @way = 2
     if (@keys & Keys.BOTTOM) is Keys.BOTTOM
-      @n = 0
+      @way = 0
 
-    @player_animation.gotoAndPlay(@n)
+    @player_animation.gotoAndPlay(@way)
