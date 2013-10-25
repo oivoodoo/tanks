@@ -1,9 +1,11 @@
 class @Game
+  interactions: []
   sprites: ['/images/sprites/settings.json']
   constructor: ->
   initialize: ->
-    @player = new Player(window.innerWidth / 2, window.innerHeight / 2)
+    @player = new Player(600, 250)
     @map = new Map(map1)
+    @contacts = new Contact
 
     loader = new PIXI.AssetLoader(@sprites)
     loader.onComplete = =>
@@ -13,11 +15,27 @@ class @Game
       @map.initialize()
       @player.initialize()
 
+      @contacts.addContactListener
+        BeginContact: (object1, object2) =>
+          if object1.type is 'bullet'
+            if object2.type is 'brick'
+              @interactions.push(new BrickInteraction(object1, object2))
+
+            if object2.type is 'stone'
+              @interactions.push(new StoneInteraction(object1, object2))
+
     loader.load()
   update: ->
     @player.update()
+
     for bullet in @player.bullets
       bullet.update()
+
+    for interaction in @interactions
+      interaction.update()
+
+    @interactions = []
+
   draw: ->
     @player.draw()
     for bullet in @player.bullets

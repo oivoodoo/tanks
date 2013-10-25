@@ -1,43 +1,42 @@
 class @Map
-  NUM_TITLES: 64
-  TILE_SIZE: 8
-
   constructor: (@map) ->
+
   initialize: ->
-    for layer in @map.layers
-      continue unless layer.name is "collision"
-
-      for object in layer.objects
-        # collisions.push('mapobject')
-        # collides.push('all')
-
-        settings =
-          id: object.name,
-          x:  object.x + object.width  * 0.5
-          y:  object.y + object.height * 0.5
-          halfHeight: object.height * 0.5
-          halfWidth:  object.width  * 0.5
-          dampen: 0
-          angle:  0
-          type:   'static'
-          # categories: collisions
-          # collidesWith: collides
-          userData:
-            id: object.name
-
-        Physics.createBody(settings)
-
     for layer in @map.layers
       continue unless layer.data?
 
       for item, index in layer.data
         continue if item is 0
+        position = @getTileSet(item)
+        for key, value of PIXI.TextureCache
+          if position.x is value.frame.x && position.y is value.frame.y
+            if key is "stone.png"
+              new Stone(item, index)
+              break
+            if key is "brick.png"
+              new Brick(item, index)
+              break
+            if key is "tree.png"
+              new Tree(item, index)
+              break
+            if key is "water.png"
+              new Water(item, index)
+              break
 
-        texture = PIXI.Texture.fromFrame("brick.png");
-        sprite = new PIXI.Sprite(texture)
-        sprite.position.x = Math.floor(index % @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
-        sprite.position.y = Math.floor(index / @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
-        stage.addChild(sprite)
+
+  getTileSet: (tileIndex) ->
+    @TILE_SIZE = 16
+    for tileset, index in @map.tilesets by -1
+      break if tileset.firstgid <= tileIndex
+
+    localIdx = tileIndex - tileset.firstgid
+    lTileX = Math.floor(localIdx % Math.floor(tileset.imagewidth / 16))
+    lTileY = Math.floor(localIdx / Math.floor(tileset.imageheight / 16))
+
+    x = lTileX * @TILE_SIZE
+    y = lTileY * @TILE_SIZE
+
+    { x: x, y: y }
 
 
 # TODO: 1. load map file using require methods in the sprockets

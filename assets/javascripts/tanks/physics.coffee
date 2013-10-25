@@ -10,14 +10,16 @@
 @b2DebugDraw    = Box2D.Dynamics.b2DebugDraw
 
 @COLLISION_GROUP =
-  'player':           0x0001
-  'projectile':       0x0001 << 2
-  'pickupobject':     0x0001 << 3
-  'mapobject':        0x0001 << 4
-  'projectileignore': 0x0001 << 5
-  'all':              0xFFFF
+  none:    0x0000
+  player:  0x0001
+  static:  0x0001 << 1
+  bullet:  0x0001 << 2
+  enemy:   0x0001 << 3
+  all:     0xFFFF
 
 class @Physics
+  @bodies: {}
+  
   @createBorder: (point1, point2) ->
     bodyDef = new b2BodyDef
     bodyDef.type = b2Body.b2_staticBody
@@ -40,13 +42,12 @@ class @Physics
 
   @createPlayer: (width, height, x, y) ->
     options = @defaultPlayerProperties
-
+    options = @defaultPlayerProperties
     fixDef = new b2FixtureDef
-    fixDef.density     = options.density
-    fixDef.friction    = options.friction
-    fixDef.restitution = options.restitution
-    fixDef.filter.categoryBits = 0x0001
-    fixDef.filter.maskBits = 0x0001
+    fixDef.density             = options.density
+    fixDef.friction            = options.friction
+    fixDef.restitution         = options.restitution
+    fixDef.filter.categoryBits = COLLISION_GROUP.player
 
     fixDef.shape = new b2PolygonShape()
     fixDef.shape.SetAsBox(width, height)
@@ -56,6 +57,7 @@ class @Physics
     bodyDef.angularDamping = options.angularDamping
     bodyDef.type           = options.type
     bodyDef.fixedRotation  = true
+    bodyDef.userData       = { id: "player-#{uuid.v4()}", type: 'player' }
 
     # we are using here cartesian coordinates the center half of the center
     # in the canvas container
@@ -77,30 +79,29 @@ class @Physics
 
   @createBullet: (width, height, x, y) ->
     options = @defaultBulletProperties
-
     fixDef = new b2FixtureDef
-    fixDef.density     = options.density
-    fixDef.friction    = options.friction
-    fixDef.restitution = options.restitution
-    fixDef.filter.categoryBits = 0x0002
-    fixDef.filter.maskBits = 0x0002
+    fixDef.density             = options.density
+    fixDef.friction            = options.friction
+    fixDef.restitution         = options.restitution
+    fixDef.filter.categoryBits = COLLISION_GROUP.bullet
+    fixDef.filter.maskBits     = COLLISION_GROUP.static | COLLISION_GROUP.enemy
 
     fixDef.shape = new b2PolygonShape()
     fixDef.shape.SetAsBox(width, height)
 
     bodyDef = new b2BodyDef()
-    bodyDef.linearDamping  = options.linearDamping
-    bodyDef.angularDamping = options.angularDamping
-    bodyDef.type           = options.type
-    bodyDef.linearVelocity = new b2Vec2(0, 0)
-
-    bodyDef.active = true
-    bodyDef.allowSleep = true
-    bodyDef.angle = 0
+    bodyDef.linearDamping   = options.linearDamping
+    bodyDef.angularDamping  = options.angularDamping
+    bodyDef.type            = options.type
+    bodyDef.linearVelocity  = new b2Vec2(0, 0)
+    bodyDef.active          = true
+    bodyDef.allowSleep      = true
+    bodyDef.angle           = 0
     bodyDef.angularVelocity = 0
-    bodyDef.awake = true
-    bodyDef.bullet = false
-    bodyDef.fixedRotation = true
+    bodyDef.awake           = true
+    bodyDef.bullet          = false
+    bodyDef.fixedRotation   = true
+    bodyDef.userData        = { id: "bullet-#{uuid.v4()}", type: "bullet" }
 
     bodyDef.position.Set(x, y)
 
@@ -128,7 +129,6 @@ class @Physics
       bodyDef.angle = entityDef.angle
     if entityDef.damping
       bodyDef.linearDamping = entityDef.damping
-
     body = world.CreateBody(bodyDef)
 
     fixtureDefinition = new b2FixtureDef
@@ -143,16 +143,16 @@ class @Physics
       fixtureDefinition.restitution = 0
 
     if entityDef.categories && entityDef.categories.length
-      fixtureDefinition.filter.categories = 0x0000
+      fixtureDefinition.filter.categoryBits = COLLISION_GROUP.none
       for category in entityDef.categories
         fixtureDefinition.filter.categoryBits |= COLLISION_GROUP[category]
-    else fixtureDefinition.filter.categoryBits = 0x0001
+    else fixtureDefinition.filter.categoryBits = COLLISION_GROUP.all
 
     if entityDef.collidesWith && entityDef.collidesWith.length
-      fixtureDefinition.filter.maskBits = 0x0000
+      fixtureDefinition.filter.maskBits = COLLISION_GROUP.none
       for collide in entityDef.collidesWith
         fixtureDefinition.filter.maskBits |= COLLISION_GROUP[collide]
-    else fixtureDefinition.filter.maskBits = 0xFFFF
+    else fixtureDefinition.filter.maskBits = COLLISION_GROUP.all
 
     if entityDef.radius
       fixtureDefinition.shape = new CircleShape(entityDef.radius)
