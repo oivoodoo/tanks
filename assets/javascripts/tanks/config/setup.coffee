@@ -40,3 +40,12 @@
   Physics.createBorder({ x: 0, y: 0 }, { x: 0, y: view.height })
   Physics.createBorder({ x: view.width, y: 0 }, { x: view.width, y: view.height })
 
+  @stats = new Stats()
+  @stats.setMode(0)
+
+  @stats.domElement.style.position = 'absolute'
+  @stats.domElement.style.left     = '0px'
+  @stats.domElement.style.top      = '0px'
+
+  document.body.appendChild( @stats.domElement )
+

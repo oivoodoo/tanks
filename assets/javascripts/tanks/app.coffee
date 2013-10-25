@@ -7,6 +7,9 @@ Setup()
 @game.initialize()
 
 animate = =>
+  # using this library to draw fps counter.
+  stats.begin()
+
   requestAnimFrame(animate)
 
   @game.update()
@@ -17,6 +20,8 @@ animate = =>
   # world.ClearForces();
 
   renderer.render(stage)
+
+  stats.end()
 
 requestAnimFrame(animate)
 
