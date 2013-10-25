@@ -24,8 +24,6 @@ class @Game
             if object2.type is 'stone'
               @interactions.push(new StoneInteraction(object1, object2))
 
-            # if object2.type is 'stone'
-
     loader.load()
   update: ->
     @player.update()
@@ -37,10 +35,6 @@ class @Game
       interaction.update()
 
     @interactions = []
-
-    # for id in @dies
-    #   Physics.bodies[id].kill()
-    # @dies = []
 
   draw: ->
     @player.draw()
