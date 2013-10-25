@@ -2,13 +2,13 @@ class @Stone
   NUM_TITLES: 32
   TILE_SIZE: 16
 
-  constructor: (object, index) ->
+  constructor: (x, y) ->
     @id = "stone-#{uuid.v4()}"
 
     texture = PIXI.Texture.fromFrame("stone.png");
     @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = Math.floor(index % @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
-    @sprite.position.y = Math.floor(index / @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
+    @sprite.position.x = x
+    @sprite.position.y = y
     stage.addChild(@sprite)
 
     settings =

@@ -2,14 +2,14 @@ class @Brick
   NUM_TITLES: 32
   TILE_SIZE: 16
 
-  constructor: (object, index) ->
+  constructor: (x, y) ->
     @lifes = 3
     @id = "brick-#{uuid.v4()}"
 
     texture = PIXI.Texture.fromFrame("brick.png");
     @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = Math.floor(index % @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
-    @sprite.position.y = Math.floor(index / @NUM_TITLES) * @TILE_SIZE - @TILE_SIZE / 2
+    @sprite.position.x = x
+    @sprite.position.y = y
     stage.addChild(@sprite)
 
     settings =
