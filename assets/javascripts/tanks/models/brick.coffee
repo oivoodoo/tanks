@@ -3,10 +3,9 @@ class @Brick
   TILE_SIZE: 16
 
   constructor: (x, y) ->
-    @lifes = 3
+    @lifes = 1
     @id = "brick-#{uuid.v4()}"
-
-    texture = PIXI.Texture.fromFrame("brick.png");
+    texture = PIXI.Texture.fromFrame("half-middle-brick.png");
     @sprite = new PIXI.Sprite(texture)
     @sprite.position.x = x
     @sprite.position.y = y

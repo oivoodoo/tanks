@@ -6,7 +6,6 @@ class @Game
     @player = new Player(600, 250)
     @map = new Map(map1)
     @contacts = new Contact
-    @mapgenerator = new MapGenerator
 
     loader = new PIXI.AssetLoader(@sprites)
     loader.onComplete = =>
