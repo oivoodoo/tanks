@@ -7,104 +7,104 @@ class @Brick
     @id = "brick-#{uuid.v4()}"
 
     ## right vertical
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 12
-    @sprite.position.y = y
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 12
+    # @sprite.position.y = y
+    # container.addChild(@sprite)
 
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 12
-    @sprite.position.y = y + 4
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 12
+    # @sprite.position.y = y + 4
+    # container.addChild(@sprite)
 
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 12
-    @sprite.position.y = y + 8
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 12
+    # @sprite.position.y = y + 8
+    # container.addChild(@sprite)
 
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 12
-    @sprite.position.y = y + 12
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 12
+    # @sprite.position.y = y + 12
+    # container.addChild(@sprite)
 
-    ## middle vertical
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 8
-    @sprite.position.y = y
-    stage.addChild(@sprite)
+    # ## middle vertical
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 8
+    # @sprite.position.y = y
+    # container.addChild(@sprite)
 
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 8
-    @sprite.position.y = y + 4
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 8
+    # @sprite.position.y = y + 4
+    # container.addChild(@sprite)
 
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 8
-    @sprite.position.y = y + 8
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 8
+    # @sprite.position.y = y + 8
+    # container.addChild(@sprite)
 
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 8
-    @sprite.position.y = y + 12
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 8
+    # @sprite.position.y = y + 12
+    # container.addChild(@sprite)
 
-    ## left-middle vertical
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 4
-    @sprite.position.y = y
-    stage.addChild(@sprite)
+    # ## left-middle vertical
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 4
+    # @sprite.position.y = y
+    # container.addChild(@sprite)
 
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 4
-    @sprite.position.y = y + 4
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 4
+    # @sprite.position.y = y + 4
+    # container.addChild(@sprite)
 
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 4
-    @sprite.position.y = y + 8
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 4
+    # @sprite.position.y = y + 8
+    # container.addChild(@sprite)
 
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x + 4
-    @sprite.position.y = y + 12
-    stage.addChild(@sprite)
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x + 4
+    # @sprite.position.y = y + 12
+    # container.addChild(@sprite)
 
-    ## left vertical
-    texture = PIXI.Texture.fromFrame("little-brick.png");
+    # ## left vertical
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x
+    # @sprite.position.y = y + 12
+    # container.addChild(@sprite)
+
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x
+    # @sprite.position.y = y + 8
+    # container.addChild(@sprite)
+
+    # texture = PIXI.Texture.fromFrame("little-brick.png");
+    # @sprite = new PIXI.Sprite(texture)
+    # @sprite.position.x = x
+    # @sprite.position.y = y + 4
+    # container.addChild(@sprite)
+
+    texture = PIXI.Texture.fromFrame("brick.png");
     @sprite = new PIXI.Sprite(texture)
     @sprite.position.x = x
-    @sprite.position.y = y + 12
-    stage.addChild(@sprite)
-
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x
-    @sprite.position.y = y + 8
-    stage.addChild(@sprite)
-
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x
-    @sprite.position.y = y + 4
-    stage.addChild(@sprite)
-
-    texture = PIXI.Texture.fromFrame("little-brick.png");
-    @sprite = new PIXI.Sprite(texture)
-    @sprite.position.x = x
     @sprite.position.y = y
-    stage.addChild(@sprite)
+    collisionContainer.addChild(@sprite)
 
     settings =
       id: @id,
@@ -127,7 +127,7 @@ class @Brick
   kill: ->
     world.DestroyBody(@body)
     delete Physics.bodies[@id]
-    stage.removeChild(@sprite)
+    collisionContainer.removeChild(@sprite)
 
 class @BrickInteraction
   constructor: (@bullet_data, @object_data) ->

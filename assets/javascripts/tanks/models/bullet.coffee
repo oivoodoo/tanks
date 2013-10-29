@@ -19,7 +19,7 @@ class @Bullet
       PIXI.Texture.fromFrame("bullet-right.png")
     ]
     @bullet_animation = new PIXI.MovieClip(textures)
-    stage.addChild(@bullet_animation)
+    bulletContainer.addChild(@bullet_animation)
     if [Keys.RIGHT, Keys.LEFT, Keys.UP, Keys.BOTTOM].indexOf(@way) isnt -1
       @body.SetAngle(@ROTATE)
 
@@ -54,5 +54,5 @@ class @Bullet
     index = game.player.bullets.indexOf(@)
     game.player.bullets.splice(index, 1)
     delete Physics.bodies[@id]
-    stage.removeChild(@bullet_animation)
+    bulletContainer.removeChild(@bullet_animation)
 

@@ -9,7 +9,7 @@ class @Tree
     @sprite = new PIXI.Sprite(texture)
     @sprite.position.x = x
     @sprite.position.y = y
-    stage.addChild(@sprite)
+    treeContainer.addChild(@sprite)
 
     settings =
       id: @id,

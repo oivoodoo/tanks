@@ -1,6 +1,14 @@
 @Setup = =>
   # create an new instance of a PIXI stage
   @stage = new PIXI.Stage(0x97c56e, true)
+  @playerContainer = new PIXI.DisplayObjectContainer()
+  @collisionContainer = new PIXI.DisplayObjectContainer()
+  @treeContainer = new PIXI.DisplayObjectContainer()
+  @waterContainer = new PIXI.DisplayObjectContainer()
+  @bulletContainer = new PIXI.DisplayObjectContainer()
+
+  # @container.scale.x = 2
+  # @container.scale.y = 2
 
   # create a renderer instance
   @renderer = PIXI.autoDetectRenderer(window.innerWidth, window.innerHeight, null)

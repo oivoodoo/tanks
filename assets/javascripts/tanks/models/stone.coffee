@@ -9,7 +9,7 @@ class @Stone
     @sprite = new PIXI.Sprite(texture)
     @sprite.position.x = x
     @sprite.position.y = y
-    stage.addChild(@sprite)
+    collisionContainer.addChild(@sprite)
 
     settings =
       id: @id,
