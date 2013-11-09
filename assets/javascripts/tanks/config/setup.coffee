@@ -6,6 +6,15 @@
   @treeContainer = new PIXI.DisplayObjectContainer()
   @waterContainer = new PIXI.DisplayObjectContainer()
   @bulletContainer = new PIXI.DisplayObjectContainer()
+ 
+  @container = new PIXI.DisplayObjectContainer()
+  # @container.addChild(@playerContainer)
+  # @container.addChild(@collisionContainer)
+  # @container.addChild(@treeContainer)
+  # @container.addChild(@waterContainer)
+  # @container.addChild(@bulletContainer)
+
+  @stage.addChild(@container)
 
   # @container.scale.x = 2
   # @container.scale.y = 2

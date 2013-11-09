@@ -16,6 +16,9 @@ class @MapGenerator
         [MapGenerator.Types.Ground, 70,   0]
       ]
 
+    @height = @height + 10
+    @width = @width + 10
+
     for row, index in @Percentages 
       if index > 0
         row[2] += row[1] + @Percentages[index - 1][2]
@@ -23,6 +26,7 @@ class @MapGenerator
         row[2] = row[1]
 
   generate: ->
+    debugger
     @map = []
     for i in [0...@width]
       row = []

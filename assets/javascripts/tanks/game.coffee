@@ -16,11 +16,11 @@ class @Game
       @player.initialize()
       @map.initialize()
 
-      stage.addChild(collisionContainer)
-      stage.addChild(waterContainer)
-      stage.addChild(playerContainer)
-      stage.addChild(treeContainer)
-      stage.addChild(bulletContainer)
+      container.addChild(collisionContainer)
+      container.addChild(waterContainer)
+      container.addChild(playerContainer)
+      container.addChild(treeContainer)
+      container.addChild(bulletContainer)
 
       @contacts.addContactListener
         BeginContact: (object1, object2) =>
@@ -42,6 +42,12 @@ class @Game
       interaction.update()
 
     @interactions = []
+
+    position = @player.body.GetPosition()
+    x = position.x - @player.bodyWidth
+    y = position.y - @player.bodyHeight
+    container.position.x = renderer.view.width / 2 - x
+    container.position.y = renderer.view.height / 2 - y
 
   draw: ->
     @player.draw()
