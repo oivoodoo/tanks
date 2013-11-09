@@ -4,7 +4,7 @@ class @Map
   initialize: ->
     generator = new MapGenerator()
     map = generator.generate()
-    
+
     TILE_SIZE = 16
     for row, y in map
       local_y = y * TILE_SIZE
@@ -18,3 +18,4 @@ class @Map
           new Tree(local_x, local_y)
         if key is MapGenerator.Types.Water
           new Water(local_x, local_y)
+

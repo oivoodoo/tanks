@@ -1,3 +1,3 @@
 //= require_tree ./vendor
-//= require ./tanks
+//= require ./tanks/index
 

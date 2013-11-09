@@ -1,0 +1,30 @@
+{
+  "name": "tanks",
+  "private": true,
+  "description": "Tanks",
+  "version": "0.0.0",
+  "homepage": "https://github.com/oivoodoo/tanks/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oivoodoo/tanks.git"
+  },
+  "author": {
+    "name": "Alexandr Korsak",
+    "email": "alex.korsak@gmail.com",
+    "url": "https://github.com/oivoodoo/"
+  },
+  "main": "./app.js",
+  "dependencies": {
+    "ejs": "*",
+    "express": "3.x",
+    "connect-assets": "*"
+  },
+  "devDependencies": {
+    "mocha": ">=0.13.0",
+    "nodemon": "*"
+  },
+  "engines": {
+    "node": ">=0.4"
+  },
+  "start": "coffee app.coffee"
+}

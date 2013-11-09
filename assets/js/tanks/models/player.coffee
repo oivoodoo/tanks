@@ -3,6 +3,7 @@ class @Player
   height: 13
   bodyWidth: 13 / 2
   bodyHeight: 13 / 2
+  speed: 70
 
   constructor: (@x, @y, @way = 3) ->
     @keys = Keys.NONE
@@ -40,13 +41,13 @@ class @Player
 
   update: ->
     if (@keys & Keys.LEFT) is Keys.LEFT
-      @body.SetLinearVelocity(new b2Vec2(-1000, 0))
+      @body.SetLinearVelocity(new b2Vec2(-@speed, 0))
     if (@keys & Keys.UP) is Keys.UP
-      @body.SetLinearVelocity(new b2Vec2(0, -1000))
+      @body.SetLinearVelocity(new b2Vec2(0, -@speed))
     if (@keys & Keys.RIGHT) is Keys.RIGHT
-      @body.SetLinearVelocity(new b2Vec2(1000, 0))
+      @body.SetLinearVelocity(new b2Vec2(@speed, 0))
     if (@keys & Keys.BOTTOM) is Keys.BOTTOM
-      @body.SetLinearVelocity(new b2Vec2(0, 1000))
+      @body.SetLinearVelocity(new b2Vec2(0, @speed))
 
     if (@keys & Keys.SPACE) is Keys.SPACE
       if @shoot_time < new Date().getTime()
@@ -72,3 +73,4 @@ class @Player
       @way = 0
 
     @player_animation.gotoAndPlay(@way)
+

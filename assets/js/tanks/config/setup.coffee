@@ -1,11 +1,21 @@
 @Setup = =>
   # create an new instance of a PIXI stage
   @stage = new PIXI.Stage(0x97c56e, true)
-  @playerContainer = new PIXI.DisplayObjectContainer()
+
+  @container          = new PIXI.DisplayObjectContainer()
+  @playerContainer    = new PIXI.DisplayObjectContainer()
   @collisionContainer = new PIXI.DisplayObjectContainer()
-  @treeContainer = new PIXI.DisplayObjectContainer()
-  @waterContainer = new PIXI.DisplayObjectContainer()
-  @bulletContainer = new PIXI.DisplayObjectContainer()
+  @treeContainer      = new PIXI.DisplayObjectContainer()
+  @waterContainer     = new PIXI.DisplayObjectContainer()
+  @bulletContainer    = new PIXI.DisplayObjectContainer()
+
+  @container.addChild(@collisionContainer)
+  @container.addChild(@waterContainer)
+  @container.addChild(@playerContainer)
+  @container.addChild(@treeContainer)
+  @container.addChild(@bulletContainer)
+
+  @stage.addChild(@container)
 
   # @container.scale.x = 2
   # @container.scale.y = 2
@@ -20,8 +30,18 @@
   window.onresize = =>
     @renderer.resize(window.innerWidth, window.innerHeight)
 
+  @stats = new Stats()
+  @stats.setMode(0)
+
+  @stats.domElement.style.position = 'absolute'
+  @stats.domElement.style.left     = '0px'
+  @stats.domElement.style.top      = '0px'
+
+  # add fps rendering window
+  document.body.appendChild(@stats.domElement)
+
   # add the renderer view element to the dom
-  @document.body.appendChild(renderer.view)
+  document.body.appendChild(@renderer.view)
   @renderer.view.style.position = "absolute"
   @renderer.view.style.top      = "0px"
   @renderer.view.style.left     = "0px"
@@ -47,13 +67,4 @@
   Physics.createBorder({ x: 0, y: 0 }, { x: view.width, y: 0 })
   Physics.createBorder({ x: 0, y: 0 }, { x: 0, y: view.height })
   Physics.createBorder({ x: view.width, y: 0 }, { x: view.width, y: view.height })
-
-  @stats = new Stats()
-  @stats.setMode(0)
-
-  @stats.domElement.style.position = 'absolute'
-  @stats.domElement.style.left     = '0px'
-  @stats.domElement.style.top      = '0px'
-
-  document.body.appendChild( @stats.domElement )
 

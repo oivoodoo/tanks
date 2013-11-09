@@ -16,12 +16,6 @@ class @Game
       @player.initialize()
       @map.initialize()
 
-      stage.addChild(collisionContainer)
-      stage.addChild(waterContainer)
-      stage.addChild(playerContainer)
-      stage.addChild(treeContainer)
-      stage.addChild(bulletContainer)
-
       @contacts.addContactListener
         BeginContact: (object1, object2) =>
           if object1.type is 'bullet'
