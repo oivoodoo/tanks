@@ -1,1 +1,1 @@
-web: PORT=$PORT node app.coffee
+web: PORT=$PORT coffee app.coffee
