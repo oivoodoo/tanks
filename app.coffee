@@ -20,7 +20,7 @@ app.get '/', (request, response) ->
 
 module.exports = app
 
-port = app.get('port') || 3003
+port = process.env.PORT || 3003
 app.listen(port)
 
 console.log("Listening on port #{port}")
