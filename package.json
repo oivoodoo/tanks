@@ -17,7 +17,8 @@
   "dependencies": {
     "ejs": "*",
     "express": "3.x",
-    "connect-assets": "*"
+    "connect-assets": "*",
+    "coffee-script": "*"
   },
   "devDependencies": {
     "mocha": ">=0.13.0",
@@ -26,5 +27,8 @@
   "engines": {
     "node": ">=0.4"
   },
-  "start": "coffee app.coffee"
+  "scripts": {
+    "start": "./node_modules/coffee-script/bin/coffee app.coffee"
+  }
 }
+
