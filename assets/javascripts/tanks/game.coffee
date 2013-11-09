@@ -12,8 +12,15 @@ class @Game
       # we are building the map at the first main layer and then we should
       # place all the players on the map. they could be in the random place in
       # the next builds to make game playable like in quake respawn.
-      @map.initialize()
+
       @player.initialize()
+      @map.initialize()
+
+      stage.addChild(collisionContainer)
+      stage.addChild(waterContainer)
+      stage.addChild(playerContainer)
+      stage.addChild(treeContainer)
+      stage.addChild(bulletContainer)
 
       @contacts.addContactListener
         BeginContact: (object1, object2) =>

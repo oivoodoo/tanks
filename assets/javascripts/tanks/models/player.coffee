@@ -36,7 +36,7 @@ class @Player
       PIXI.Texture.fromFrame("yellow-tank-right.png")
     ]
     @player_animation = new PIXI.MovieClip(textures)
-    stage.addChild(@player_animation)
+    playerContainer.addChild(@player_animation)
 
   update: ->
     if (@keys & Keys.LEFT) is Keys.LEFT
