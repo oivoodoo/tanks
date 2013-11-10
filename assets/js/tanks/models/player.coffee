@@ -6,21 +6,7 @@ class @Player
   speed: 70
 
   constructor: (@x, @y, @way = 3) ->
-    @keys = Keys.NONE
-
-    window.addEventListener 'keydown', (e) =>
-      key = KeyboardMapping[e.keyCode]
-      if key?
-        @keys2 = @keys | key
-        if @keys2 != @keys
-          @keys = @keys2
-
-    window.addEventListener 'keyup', (e) =>
-      key = KeyboardMapping[e.keyCode]
-      if key?
-        @keys2 = @keys & ~key
-        if @keys2 != @keys
-          @keys = @keys2
+    Player.keys = Keys.NONE
 
     @body = Physics.createPlayer(@bodyWidth, @bodyHeight, @x, @y)
     Physics.bodies[@body.GetUserData().id] = @
@@ -40,16 +26,16 @@ class @Player
     playerContainer.addChild(@player_animation)
 
   update: ->
-    if (@keys & Keys.LEFT) is Keys.LEFT
+    if (Player.keys & Keys.LEFT) is Keys.LEFT
       @body.SetLinearVelocity(new b2Vec2(-@speed, 0))
-    if (@keys & Keys.UP) is Keys.UP
+    if (Player.keys & Keys.UP) is Keys.UP
       @body.SetLinearVelocity(new b2Vec2(0, -@speed))
-    if (@keys & Keys.RIGHT) is Keys.RIGHT
+    if (Player.keys & Keys.RIGHT) is Keys.RIGHT
       @body.SetLinearVelocity(new b2Vec2(@speed, 0))
-    if (@keys & Keys.BOTTOM) is Keys.BOTTOM
+    if (Player.keys & Keys.BOTTOM) is Keys.BOTTOM
       @body.SetLinearVelocity(new b2Vec2(0, @speed))
 
-    if (@keys & Keys.SPACE) is Keys.SPACE
+    if (Player.keys & Keys.SPACE) is Keys.SPACE
       if @shoot_time < new Date().getTime()
         position = @body.GetPosition()
         @shoot_time = new Date().getTime() + @shoot_delay
@@ -63,13 +49,13 @@ class @Player
     @player_animation.position.y = position.y - @bodyHeight
 
     # play frame
-    if (@keys & Keys.LEFT) is Keys.LEFT
+    if (Player.keys & Keys.LEFT) is Keys.LEFT
       @way = 1
-    if (@keys & Keys.UP) is Keys.UP
+    if (Player.keys & Keys.UP) is Keys.UP
       @way = 3
-    if (@keys & Keys.RIGHT) is Keys.RIGHT
+    if (Player.keys & Keys.RIGHT) is Keys.RIGHT
       @way = 2
-    if (@keys & Keys.BOTTOM) is Keys.BOTTOM
+    if (Player.keys & Keys.BOTTOM) is Keys.BOTTOM
       @way = 0
 
     @player_animation.gotoAndPlay(@way)

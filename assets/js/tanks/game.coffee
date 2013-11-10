@@ -3,8 +3,10 @@ class @Game
   sprites: ['/images/sprites/settings.json']
   constructor: ->
   initialize: ->
-    @player = new Player(600, 250)
-    @map = new Map(map1)
+    @keyboard = new Keyboard()
+    @gamepad  = new GamePad()
+    @player   = new Player(600, 250)
+    @map      = new Map(map1)
     @contacts = new Contact
 
     loader = new PIXI.AssetLoader(@sprites)
@@ -27,6 +29,7 @@ class @Game
 
     loader.load()
   update: ->
+    @gamepad.update()
     @player.update()
 
     for bullet in @player.bullets
