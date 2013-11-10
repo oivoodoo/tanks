@@ -3,11 +3,12 @@ class @Game
   sprites: ['/images/sprites/settings.json']
   constructor: ->
   initialize: ->
-    @keyboard = new Keyboard()
-    @gamepad  = new GamePad()
-    @player   = new Player(600, 250)
-    @map      = new Map(map1)
-    @contacts = new Contact
+    @keyboard  = new Keyboard()
+    @gamepad   = new GamePad()
+    @player    = new Player(600, 250)
+    @map       = new Map(map1)
+    @contacts  = new Contact
+    @collision = new Contact
 
     loader = new PIXI.AssetLoader(@sprites)
     loader.onComplete = =>
@@ -17,6 +18,12 @@ class @Game
 
       @player.initialize()
       @map.initialize()
+
+      @collision.addContactListener
+        BeginContact: (object1, object2) =>
+          if object1.type is 'player'
+            if object2.type is 'brick'
+              console.log('test1')
 
       @contacts.addContactListener
         BeginContact: (object1, object2) =>

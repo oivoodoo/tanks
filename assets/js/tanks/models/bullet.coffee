@@ -48,7 +48,7 @@ class @Bullet
       @current_position = 4
 
     @bullet_animation.gotoAndPlay(@current_position)
-    
+
   kill: ->
     world.DestroyBody(@body)
     index = game.player.bullets.indexOf(@)

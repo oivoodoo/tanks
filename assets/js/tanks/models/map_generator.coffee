@@ -1,5 +1,5 @@
 class @MapGenerator
-  @Types = 
+  @Types =
     Ground: 0
     Tree:   1
     Brick:  2
@@ -7,7 +7,7 @@ class @MapGenerator
     Water:  4
 
   constructor: (@height = Math.floor(window.innerWidth / 16), @width = Math.floor(window.innerHeight / 16)) ->
-    @Percentages = 
+    @Percentages =
       [
         [MapGenerator.Types.Tree,   7.5, 0]
         [MapGenerator.Types.Brick,  7.5, 0]
@@ -16,7 +16,7 @@ class @MapGenerator
         [MapGenerator.Types.Ground, 70,   0]
       ]
 
-    for row, index in @Percentages 
+    for row, index in @Percentages
       if index > 0
         row[2] += row[1] + @Percentages[index - 1][2]
       else
