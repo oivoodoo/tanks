@@ -2,5 +2,5 @@ bower_components/
 .DS_Store
 bin/
 node_modules/
-
+commonjs/node_modules/
 
